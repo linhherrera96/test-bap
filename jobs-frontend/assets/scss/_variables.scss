@@ -1,0 +1,266 @@
+$font-weight-normal: 400 !default;
+$font-weight-bold: 600 !default;
+$spacing-base: 0 !default;
+$font-family-base: "Noto Sans JP", sans-serif !default;
+$font-size-base: 16px !default;
+$font-weight-base: 400 !default;
+$line-height-base: normal !default;
+$body-color: #333333 !default;
+$body-bg: #ffffff !default;
+$gray-100: #ebe9e8 !default;
+$gray-200: #bebebe !default;
+$gray-300: #b2b2b2 !default;
+$gray-400: #e5e5e5 !default;
+$gray-500: #7e7d7d !default;
+$gray-600: #707070 !default;
+$gray-700: #a4a4a0 !default;
+$gray-800: #5e5c5c !default;
+$gray-900: #333333 !default;
+$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(
+    (
+        "100": $gray-100,
+        "200": $gray-200,
+        "600": $gray-600,
+        "900": $gray-900,
+    ),
+    $grays
+);
+$yellow: #f2d64c !default;
+$red: #e23333 !default;
+$danger: #dc3545 !default;
+$lightred: #e94545 !default;
+$brown: #423931 !default;
+$darkgreen: #3d873d !default;
+$green: #5daf5d !default;
+$lightgreen: #95c895 !default;
+$be: #af9874 !default;
+$brownlight: #493426 !default;
+$lightyellow: #d8cfc8 !default;
+$lightgreen2: #eaf8ea !default;
+$lightgray: #f5f5f5 !default;
+$graydisbled: #d9d5d3 !default;
+$greenlight: #97c47e !default;
+$black: #000 !default;
+$lightblue: #adb5bd !default;
+$graybland: #eaeceb !default;
+$orange: #e79c3a !default;
+$lightblack: #5e5c5c !default;
+$lightwhite: #faf9f3 !default;
+$colors: () !default;
+$colors: map-merge(
+    (
+        "yellow": $yellow,
+        "red": $red,
+        "lightred": $lightred,
+        "brown": $brown,
+        "darkgreen": $darkgreen,
+        "green": $green,
+        "lightgreen": $lightgreen,
+        "be": $be,
+        "brownlight": $brownlight,
+    ),
+    $colors
+);
+// custom color
+$white: #ffffff !default;
+$green-1: #629a62 !default;
+$blue-1: #495057 !default;
+$blue-2: #ced4da !default;
+$green-2: #dae1d8 !default;
+$darkgray: #a9a9a9 !default;
+$res_280: "only screen and (max-width: 280px)";
+$res_240320: "only screen and (min-width: 240px) and (max-width: 320px)";
+$res_320374: "only screen and (min-width: 320px) and (max-width: 374px)";
+$res_375424: "only screen and (min-width: 375px) and (max-width: 424px)";
+$res_424: "only screen and (max-width: 424px)";
+$res_480: "only screen and (max-width: 480px)";
+$res_576: "only screen and (max-width: 576px)";
+$res_425767: "only screen and (min-width: 425px) and (max-width: 767px)";
+$res_767: "only screen and (max-width: 767px)";
+$res_768: "only screen and (min-width: 768px)";
+$res_768991: "only screen and (min-width: 768px) and (max-width: 991px)";
+$res_991: "only screen and (max-width: 991px)";
+$res_01199500: "only screen and (max-width: 1199px) and (min-height: 500px)";
+$res_01199499: "only screen and (max-width: 1199px) and (max-height: 499px)";
+$res_992: "only screen and (min-width: 992px)";
+$res_992767: "only screen and (max-width: 767px) and (orientation: landscape)";
+$res_1024768: "only screen and (min-width: 768px) and (orientation: landscape)";
+$res_9921023: "only screen and (min-width: 992px) and (max-width: 1023px)";
+$res_10241365: "only screen and (min-width: 1024px) and (max-width: 1365px)";
+$res_0102401366: "only screen and (min-width: 1024px) and (min-height: 1366px)";
+$res_01199: "only screen and (max-width: 1199px)";
+$res_1200: "only screen and (min-width: 1200px)";
+$res_01023: "only screen and (max-width: 1023px)";
+$res_1024: "only screen and (min-width: 1024px)";
+$res_1280: "only screen and (max-width: 1280px)";
+$res_01365: "only screen and (max-width: 1365px)";
+$res_1366: "only screen and (min-width: 1366px)";
+$res_1400: "only screen and (min-width: 1400px)";
+$res_1600: "only screen and (min-width: 1600px)";
+$res_12001599: "only screen and (min-width: 1200px) and (max-width: 1599px)";
+$res_0133601440: "only screen and (min-width: 1336px) and (max-width: 1440px)";
+// mixin screen responsive
+@mixin screen($point) {
+    @if $point==280 {
+        @media #{$res_280} {
+            @content;
+        }
+    }
+    @if $point==240320 {
+        @media #{$res_240320} {
+            @content;
+        }
+    }
+    @if $point==320374 {
+        @media #{$res_320374} {
+            @content;
+        }
+    }
+    @if $point==375424 {
+        @media #{$res_375424} {
+            @content;
+        }
+    }
+    @if $point==424 {
+        @media #{$res_424} {
+            @content;
+        }
+    }
+    @if $point==480 {
+        @media #{$res_480} {
+            @content;
+        }
+    }
+    @if $point==576 {
+        @media #{$res_576} {
+            @content;
+        }
+    }
+    @if $point==425767 {
+        @media #{$res_425767} {
+            @content;
+        }
+    }
+    @if $point==767 {
+        @media #{$res_767} {
+            @content;
+        }
+    }
+    @if $point==768 {
+        @media #{$res_768} {
+            @content;
+        }
+    }
+    @if $point==768991 {
+        @media #{$res_768991} {
+            @content;
+        }
+    }
+    @if $point==991 {
+        @media #{$res_991} {
+            @content;
+        }
+    }
+    @if $point==01199500 {
+        @media #{$res_01199500} {
+            @content;
+        }
+    }
+    @if $point==01199499 {
+        @media #{$res_01199499} {
+            @content;
+        }
+    }
+    @if $point==992 {
+        @media #{$res_992} {
+            @content;
+        }
+    }
+    @if $point==992767 {
+        @media #{$res_992767} {
+            @content;
+        }
+    }
+    @if $point==1024768 {
+        @media #{$res_1024768} {
+            @content;
+        }
+    }
+    @if $point==9921023 {
+        @media #{$res_9921023} {
+            @content;
+        }
+    }
+    @if $point==01023 {
+        @media #{$res_01023} {
+            @content;
+        }
+    }
+    @if $point==1024 {
+        @media #{$res_1024} {
+            @content;
+        }
+    }
+    @if $point==10241365 {
+        @media #{$res_10241365} {
+            @content;
+        }
+    }
+    @if $point==0102401366 {
+        @media #{$res_0102401366} {
+            @content;
+        }
+    }
+    @if $point==01199 {
+        @media #{$res_01199} {
+            @content;
+        }
+    }
+    @if $point==1200 {
+        @media #{$res_1200} {
+            @content;
+        }
+    }
+    @if $point==1280 {
+        @media #{$res_1280} {
+            @content;
+        }
+    }
+    @if $point==01365 {
+        @media #{$res_01365} {
+            @content;
+        }
+    }
+    @if $point==01365 {
+        @media #{$res_01365} {
+            @content;
+        }
+    }
+    @if $point==1366 {
+        @media #{$res_1366} {
+            @content;
+        }
+    }
+    @if $point==1400 {
+        @media #{$res_1400} {
+            @content;
+        }
+    }
+    @if $point==1600 {
+        @media #{$res_1600} {
+            @content;
+        }
+    }
+    @if $point==12001599 {
+        @media #{$res_12001599} {
+            @content;
+        }
+    }
+    @if $point==133601440 {
+        @media #{$res_0133601440} {
+            @content;
+        }
+    }
+}
