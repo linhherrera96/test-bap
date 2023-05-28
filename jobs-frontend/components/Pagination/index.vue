@@ -5,10 +5,10 @@
       :total-rows="totalpage"
       :per-page="perPage"
       v-bind:align="align"
-      first-text="First"
-      prev-text="Back"
-      next-text="Next"
-      last-text="Last"
+      first-text="最初へ"
+      prev-text="前へ"
+      next-text="次へ"
+      last-text="最後へ"
     ></b-pagination>
   </div>
 </template>

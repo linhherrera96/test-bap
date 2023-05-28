@@ -29,14 +29,34 @@
           margin-bottom: 20px;
           width: 50%;
           .fd-user-listjob-card-filter {
-            width: calc((100% - 55px) / 5);
+            width: 100px;
+          }
+        }
+        &.mb-custom-add {
+          margin-bottom: 20px;
+          width: 50%;
+          justify-content: end;
+          .fd-user-listjob-card-filter {
+            width: 100px;
+          }
+        }
+        &.mb-custom-select {
+          margin-bottom: 20px;
+          width: 50%;
+          justify-content: start;
+          .fd-user-listjob-card-filter {
+            width: 100px;
           }
         }
       }
       &-filter {
         margin: 0 6px;
         margin-top: 10px;
-        width: calc((100% - 60px) / 5);
+        width: calc((100% - 60px) / 6);
+        @include screen(480) {
+          width: 100%;
+        }
+        
         input {
           width: 100%;
           display: inline;
@@ -53,6 +73,11 @@
         }
         button.reset-search {
           background-color: #707070;
+          width: 100px;
+        }
+        button.search {
+          background-color: #5daf5d;
+          width: 100px;
         }
       }
       &-select {
@@ -66,7 +91,7 @@
     }
     .custom-group {
       display: flex;
-      justify-content: space-between;
+      // justify-content: end;
       .fd-user-listjob-card-select {
         margin-top: 10px;
       }

@@ -533,3 +533,69 @@ input[type=password]{
         }
     }
 }
+.validate-form{
+    .is-invalid{
+        padding-right: 70px!important;
+    }
+    .valiInputAfterText{
+        .is-invalid{
+            padding-right: 90px!important;
+        }
+        .back-input-text-wrapper{
+            right: 35px;
+        }
+        
+        &.oneText{
+            .is-invalid{
+                padding-right: 65px!important;
+            }
+        }
+    }
+    
+    &.invalidTextarea{
+        .is-invalid{
+            background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 1.1875rem);
+        }
+        .error-text{
+            right: 15px;
+        }
+    }
+    .error {
+        position: absolute;
+        top: 50%;
+        right: 35px;
+        width: 15px;
+        height: 15px;
+        font-size: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 100%;
+        color: $red;
+        transform: translateY(-50%);
+      }
+      .error-text {
+        position: absolute;
+        top: auto;
+        bottom: calc(100% - 30px);;
+        right: 0;
+        padding: 2px 15px;
+        background: $orange;
+        color: #fff;
+        border-radius: 6px;
+        z-index: 1;
+        &::before {
+          content: "";
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid $orange;
+          position: absolute;
+          top: 100%;
+          right: 20px;
+          transform: translateX(50%);
+        }
+      }
+}

@@ -24,6 +24,7 @@ export default {
   },
 
   publicRuntimeConfig: {
+    // eslint-disable-next-line no-undef
     baseURL: process.env.API_BASE
   },
   // Global CSS: https://go.nuxtjs.dev/config-css

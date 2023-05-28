@@ -15,10 +15,19 @@
       </div>
       <!-- content -->
       <div class="wrap-admin-content">
-        <div class="wrap-admin-content-sidebar" v-bind:class="{ showsidebar: sidebar }">
+        <div
+          class="wrap-admin-content-sidebar"
+          v-bind:class="{ showsidebar: sidebar }"
+        >
           <div class="wrap-admin-content-sidebar-header">
-            <span class="w-100 h-100 d-flex align-items-center justify-content-center mt-4">
-              <b-img src="https://bap-software.net/wp-content/uploads/2020/03/logo-bap-software-1.png" class="w-75" alt="Responsive image"></b-img>
+            <span
+              class="w-100 h-100 d-flex align-items-center justify-content-center mt-4"
+            >
+              <b-img
+                src="https://bap-software.net/wp-content/uploads/2020/03/logo-bap-software-1.png"
+                class="w-75"
+                alt="Responsive image"
+              ></b-img>
             </span>
             <button class="_btnShowSidebar" v-on:click="toggleSidebar">
               <Icon icon="Bars" />
@@ -26,10 +35,11 @@
           </div>
           <ul class="wrap-admin-content-sidebar-content">
             <li class="sidebar-content-item">
-              <NuxtLink to="/admin/user/list">
+              <NuxtLink to="/jobs/list">
                 <div class="sidebar-content-item-icon">
-                  <Icon icon="User" />
-                </div>ToDo
+                  <Icon icon="FileText" />
+                </div>
+                ToDo
               </NuxtLink>
             </li>
           </ul>
@@ -39,7 +49,10 @@
             </button>
           </div>
         </div>
-        <main class="wrap-admin-content-mainNuxt" v-bind:class="{ _fullWidthMainNuxt: !sidebar }">
+        <main
+          class="wrap-admin-content-mainNuxt"
+          v-bind:class="{ _fullWidthMainNuxt: !sidebar }"
+        >
           <Nuxt />
         </main>
       </div>
@@ -59,20 +72,32 @@ export default {
     return {
       showSetting: false,
       sidebar: true,
+    };
+  },
+  created() {
+    if (window.innerWidth <= 1200) {
+      this.sidebar = false;
+    } else {
+      this.sidebar = true;
     }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 1200) {
+        this.sidebar = false;
+      } else {
+        this.sidebar = true;
+      }
+    });
   },
   methods: {
     setShowSettings() {
-      this.showSetting = !this.showSetting
+      this.showSetting = !this.showSetting;
     },
-    logoutBtn() {
-      this.$router.push('/admin/logout')
-    },
+    logoutBtn() {},
     toggleSidebar() {
-      this.sidebar = !this.sidebar
-    }
-  }
-}
+      this.sidebar = !this.sidebar;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .wrap-admin {
@@ -124,7 +149,7 @@ export default {
       box-shadow: 1px 1px 4px 1px #717171;
       color: #fff;
       &::after {
-        content: '';
+        content: "";
         width: 0;
         height: 0;
         border-left: 12px solid transparent;
@@ -262,7 +287,7 @@ export default {
       height: 100%;
       @include screen(767) {
         &::before {
-          content: '';
+          content: "";
           width: calc(100vw - 270px);
           position: absolute;
           background-color: #000;
