@@ -1,12 +1,6 @@
 export const tableFields = {
   LIST_JOBS: [
     {
-      key: "id",
-      label: "#",
-      thStyle: "min-width:40px; text-align:center",
-      sortable: true
-    },
-    {
       key: "title",
       label: "タイトル",
       thStyle: "min-width:200px; text-align:center",

@@ -215,6 +215,8 @@ class JobController extends BaseController
             $job['description'] = isset($request->description) ? $request->description : $job['description'];
             $job['status_complete'] = isset($request->status_complete) ? $request->status_complete : $job['status_complete'];
             $job['due_date'] = isset($request->due_date) ? $request->due_date : $job['due_date'];
+            $job['updated_at'] =  Carbon::now();
+            $job['created_at'] =  Carbon::now();
 
             //update job
             $this->job->updateJob($id, $job->toArray());
@@ -310,7 +312,7 @@ class JobController extends BaseController
         } catch (Exception $e) {
             error_log($e);
             DB::rollBack();
-            $this->log("createJob", null, ["job_id" => $id], $e->getMessage());
+            $this->log("createJob", null, null, $e->getMessage());
             return $this->sendError(__('app.system_error'), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

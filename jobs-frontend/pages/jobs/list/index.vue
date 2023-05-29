@@ -1,5 +1,6 @@
 <template>
   <div class="fd-user-listjob">
+    <PreLoad v-bind:preload="preload" />
     <div class="fd-user-listjob-card">
       <div class="fd-user-listjob-card-header">
         <div class="fd-user-listjob-card-select">
@@ -15,6 +16,7 @@
             class="form-control"
             placeholder="ID"
             v-on:keyup.enter="search()"
+            v-on:keypress="onlyNumber($event)"
           />
         </div>
         <div class="fd-user-listjob-card-filter">
@@ -47,6 +49,7 @@
             v-bind:class="{
               'option-null': dataFilter.status_complete === '',
             }"
+            v-on:change="search()"
           >
             <b-form-select-option v-bind:value="''" style="color: #bebebe"
               >All</b-form-select-option
@@ -102,12 +105,11 @@
 
       <div class="fd-user-listjob-card-table">
         <b-table
-          v-bind:items="dataTable"
+          v-bind:items="listJobData"
           v-bind:fields="fields"
           hover
           responsive
           thead-class="header-custom"
-          v-on:head-clicked="sort"
         >
           <template #head(id)="data">
             <div class="d-flex justify-content-between align-items-center">
@@ -171,7 +173,7 @@
               </b-button>
             </div>
           </template>
-          <template v-if="dataTable.length === 0" #top-row>
+          <template v-if="listJobData.length === 0" #top-row>
             <td v-bind:colspan="fields.length" class="message-no-item">
               {{ MESSAGE.DATA_TABLE.NO_ITEM }}
             </td>
@@ -344,13 +346,12 @@
         </div>
       </b-modal>
 
-      <div v-if="totalRows > 1">
+      <div v-if="totalPage > 1">
         <FDPagination
           class="wrap-list-pagination"
-          v-bind:totalpage="totalRows"
           align="center"
-          v-bind:current-page="currentPage"
-          v-bind:per-page="selectPerPage"
+          v-bind:totalpage="totalPage"
+          v-bind:currentPage="currentPage"
           v-on:update-page="updatePage"
         />
       </div>
@@ -365,6 +366,7 @@ import { maxLength, required } from "vuelidate/lib/validators";
 import { tableFields } from "@/utils/table-fields";
 import FDButton from "@/components/Button";
 import FDPagination from "@/components/Pagination";
+import PreLoad from "@/components/PreLoad";
 import { Message } from "@/utils/message";
 
 export default {
@@ -372,6 +374,7 @@ export default {
   components: {
     FDButton,
     FDPagination,
+    PreLoad,
   },
   layout: "dashboard",
   data() {
@@ -379,113 +382,7 @@ export default {
       // messageTable: Message.DATA_TABLE,
       fields: tableFields.LIST_JOBS,
       MESSAGE: Message,
-      dataTable: [
-        {
-          id: 1,
-          title: "Tuyển Vuejs",
-          description: "Lương upto 2000$",
-          status_complete: "0",
-          due_date: "2023-05-25",
-        },
-        {
-          id: 2,
-          title: "Tuyển ReactJS 2 năm kinh nghiệm",
-          description: "Lương upto 1500$",
-          status_complete: "1",
-          due_date: "2023-06-12",
-        },
-        {
-          id: 3,
-          title: "Tuyển Python 3 năm kinh nghiệm, onsite tại Hà Nội",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-06-30",
-        },
-        {
-          id: 4,
-          title: "Tuyển Junior Java Spring Boot",
-          description: "Lương upto 1000$",
-          status_complete: "1",
-          due_date: "2023-06-04",
-        },
-        {
-          id: 5,
-          title: "Tuyển QA",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-05-31",
-        },
-        {
-          id: 1,
-          title: "Tuyển Vuejs",
-          description: "Lương upto 2000$",
-          status_complete: "0",
-          due_date: "2023-05-25",
-        },
-        {
-          id: 2,
-          title: "Tuyển ReactJS 2 năm kinh nghiệm",
-          description: "Lương upto 1500$",
-          status_complete: "1",
-          due_date: "2023-06-12",
-        },
-        {
-          id: 3,
-          title: "Tuyển Python 3 năm kinh nghiệm, onsite tại Hà Nội",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-06-30",
-        },
-        {
-          id: 4,
-          title: "Tuyển Junior Java Spring Boot",
-          description: "Lương upto 1000$",
-          status_complete: "1",
-          due_date: "2023-06-04",
-        },
-        {
-          id: 5,
-          title: "Tuyển QA",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-05-31",
-        },
-        {
-          id: 1,
-          title: "Tuyển Vuejs",
-          description: "Lương upto 2000$",
-          status_complete: "0",
-          due_date: "2023-05-25",
-        },
-        {
-          id: 2,
-          title: "Tuyển ReactJS 2 năm kinh nghiệm",
-          description: "Lương upto 1500$",
-          status_complete: "1",
-          due_date: "2023-06-12",
-        },
-        {
-          id: 3,
-          title: "Tuyển Python 3 năm kinh nghiệm, onsite tại Hà Nội",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-06-30",
-        },
-        {
-          id: 4,
-          title: "Tuyển Junior Java Spring Boot",
-          description: "Lương upto 1000$",
-          status_complete: "1",
-          due_date: "2023-06-04",
-        },
-        {
-          id: 5,
-          title: "Tuyển QA",
-          description: "Lương upto 2000$",
-          status_complete: "1",
-          due_date: "2023-05-31",
-        },
-      ],
+      listJobData: [],
       person: null,
       options: [
         { value: 10, text: 10 },
@@ -504,20 +401,19 @@ export default {
         fitToScreen: true,
       },
       dataJob: {
-        id: "",
-        status_complete: "1",
+        status_complete: "",
         description: "",
         title: "",
-        due_date: new Date(),
+        due_date: "",
       },
       dataFilter: {
         id: "",
         status_complete: "",
         description: "",
         title: "",
-        due_date: new Date(),
+        due_date: "",
       },
-      totalpage: 1,
+      totalPage: 1,
       sortCurrent: null,
       sortType: false,
       currentPage: 1,
@@ -530,6 +426,8 @@ export default {
       disabledButton: true,
       pageSize: 10,
       selectPerPage: 10,
+      jobId: "",
+      preload: false,
     };
   },
   validations: {
@@ -556,52 +454,86 @@ export default {
   },
   computed: {
     ...mapGetters({
-      listjob: "userUser/listjob",
-      tokenUser: "userUser/tokenUser",
+      dataJobList: "job/dataJobList",
+      success: "job/success",
+      message: "job/message",
+      exception: "job/exception",
+      error: "job/error",
     }),
   },
   watch: {
     selectPerPage() {
-      this.pageSize = this.selectPerPage;
-      this.totalRows = Math.ceil(this.dataTable.length / this.selectPerPage);
-      console.log(this.dataTable);
-      this.currentPage = 1;
+      this.dataJob.per_page = this.selectPerPage;
+      this.getListJob(this.dataJob);
+    },
+
+    dataJobList() {
+      this.loading = false;
+      this.loadingReset = false;
+      this.preload = false;
+      this.listJobData = this.dataJobList.data;
+      this.totalPage = this.dataJobList.last_page;
+      this.currentPage = this.dataJobList.current_page;
+    },
+
+    success() {
+      if (this.success) {
+        this.preload = false;
+        this.showModalAddJob = false;
+        this.$toasted.success(this.message, this.optionToast);
+        this.dataJob = {
+          id: "",
+          status_complete: "1",
+          description: "",
+          title: "",
+          due_date: "",
+        };
+        this.$v.$reset();
+        this.getListJob();
+        this.$store.commit("job/set", ["message", ""]);
+        this.$store.commit("job/set", ["success", false]);
+      }
+    },
+
+    error() {
+      if (this.error) {
+        this.preload = false;
+        this.showModalAddJob = false;
+        this.$toasted.error(this.message, this.optionToast);
+        this.$store.commit("job/set", ["message", ""]);
+        this.$store.commit("job/set", ["error", false]);
+      }
+    },
+
+    exception() {
+      if (this.exception) {
+        this.preload = false;
+        this.$toasted.error(this.message, this.optionToast);
+        this.$store.commit("job/set", ["message", ""]);
+        this.$store.commit("job/set", ["exception", false]);
+      }
     },
   },
   created() {
-    this.totalRows = Math.ceil(this.dataTable.length / this.selectPerPage);
+    this.dataJob.per_page = this.selectPerPage;
+    this.dataJob.page = this.currentPage;
+    this.getListJob(this.dataJob);
   },
   methods: {
     ...mapActions({
-      getlistjob: "userUser/getlistjob",
-      minashiLogin: "userUser/minashiLogin",
+      getListJob: "job/getListJob",
+      createNewJob: "job/createNewJob",
+      updateJobById: "job/updateJobById",
+      deleteJobById: "job/deleteJobById",
     }),
 
-    sort(field) {
-      if (this.sortCurrent !== field) {
-        this.sortCurrent = field;
-        this.sortType = false;
-      } else {
-        this.sortType = !this.sortType;
-      }
-      this.dataJob = {
-        ...this.dataJob,
-        sort: this.fields.findIndex((item) => item.key === this.sortCurrent),
-        sort_type: this.sortType ? 2 : 1,
-      };
-      // this.getlistjob({
-      //   data: {
-      //     ...this.dataJob,
-      //     sort: this.fields.findIndex((item) => item.key === this.sortCurrent),
-      //     sort_type: this.sortType ? 2 : 1,
-      //   },
-      //   perPage: this.selectPerPage,
-      //   page: 1,
-      // });
+    updatePage(page) {
+      this.dataFilter.page = page;
+      this.getListJob(this.dataFilter);
     },
+
     addJob() {
       this.dataJob = {
-        id: "",
         status_complete: "1",
         description: "",
         title: "",
@@ -617,14 +549,15 @@ export default {
       this.showModalAddJob = true;
       this.dataJob = {
         id: item.id,
-        status_complete: item.status_complete,
+        status_complete: item.status_complete.toString(),
         description: item.description,
         title: item.title,
-        due_date: item.due_date,
+        due_date: this.$moment(item.due_date).format("YYYY-MM-DD").toString(),
       };
     },
 
-    deleteJobModal() {
+    deleteJobModal(id) {
+      this.jobId = id;
       this.$refs["my-modal"].show();
     },
 
@@ -634,31 +567,21 @@ export default {
 
     search() {
       this.loading = true;
+      this.preload = true;
       this.searchHandle();
     },
 
     deleteJob() {
       this.$refs["my-modal"].hide();
-      this.$toasted.success(
-        this.MESSAGE.JOBS.DELETE_JOB_SUCCESS,
-        this.optionToast
-      );
+      this.deleteJobById(this.jobId);
     },
 
     searchHandle() {
-      this.getlistjob({
-        data: this.dataFilter,
-        perPage: this.selectPerPage,
-        page: 1,
-      });
-    },
-
-    updatePage(page) {
-      this.getlistjob({
-        data: this.dataJob,
-        perPage: this.selectPerPage,
-        page,
-      });
+      this.dataFilter.perPage = this.selectPerPage;
+      this.dataFilter.page = 1;
+      this.dataFilter.status_complete =
+        this.dataFilter.status_complete.toString();
+      this.getListJob(this.dataFilter);
     },
 
     createJob() {
@@ -667,11 +590,8 @@ export default {
         return;
       }
       if (!this.$v.$error) {
-        this.showModalAddJob = false;
-        this.$toasted.success(
-          this.MESSAGE.JOBS.ADD_JOB_SUCCESS,
-          this.optionToast
-        );
+        this.preload = true;
+        this.createNewJob(this.dataJob);
       }
     },
     updateJob() {
@@ -680,12 +600,19 @@ export default {
         return;
       }
       if (!this.$v.$error) {
-        console.log(this.dataJob);
-        this.showModalAddJob = false;
-        this.$toasted.success(
-          this.MESSAGE.JOBS.UPDATE_JOB_SUCCESS,
-          this.optionToast
-        );
+        const dataUpdate = {
+          id: this.dataJob.id,
+          data: {
+            status_complete: this.dataJob.status_complete.toString(),
+            description: this.dataJob.description,
+            title: this.dataJob.title,
+            due_date: this.$moment(this.dataJob.due_date)
+              .format("YYYY-MM-DD")
+              .toString(),
+          },
+        };
+        this.preload = true;
+        this.updateJobById(dataUpdate);
       }
     },
     closeModal() {
@@ -699,16 +626,25 @@ export default {
       this.$v.$reset();
       this.showModalAddJob = false;
     },
+
     resetSearch() {
-      // this.loadingReset = true;
+      this.loadingReset = true;
+      this.preload = true;
       this.dataFilter = {
         id: "",
         status_complete: "",
         description: "",
         title: "",
-        due_date: new Date(),
+        due_date: "",
       };
       this.searchHandle();
+    },
+
+    onlyNumber($event) {
+      const keyCode = $event.keyCode ? $event.keyCode : $event.which;
+      if (keyCode < 48 || keyCode > 57) {
+        $event.preventDefault();
+      }
     },
   },
 };

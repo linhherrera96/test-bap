@@ -1,5 +1,5 @@
 <template>
-  <div v-if="preload" class="sd-preload flex justify-center items-center">
+  <div v-if="preload" class="preload">
     <div class="snippet" data-title=".dot-flashing">
       <div class="stage">
         <div class="dot-flashing"></div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "SDPreload",
+  name: "Preload",
   props: {
     preload: {
       type: Boolean,
@@ -23,8 +23,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sd-preload {
+.preload {
   position: fixed;
+  justify-content: center;
+  display: flex;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;

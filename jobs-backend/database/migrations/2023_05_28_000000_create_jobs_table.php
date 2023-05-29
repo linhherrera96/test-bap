@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('status_complete');
-            $table->timestamp('due_date')->nullable();
+            $table->string('due_date');
             $table->timestamps();
         });
     }
